@@ -26,10 +26,14 @@ namespace vaja1
         int stevilo_tock = 2; /// koliko tock bomo narisali (3 je tocka in daljica, 4 sta 2 daljici)
         private void FormMouse_MouseClick(object sender, MouseEventArgs e)
         {
-            Brush aBrush = (Brush)Brushes.Black;
+            Brush aBrush = (Brush)Brushes.Black; // za risanje tock
+            Pen pen = new Pen(ForeColor); // za risanje daljic med tockama
             Graphics g = this.CreateGraphics();
-            ///g.Clear(Color.White); // pocistimo tocke
-            if (stevec == 0) { g.Clear(Color.White); }
+
+            if (stevec == 0)
+            { 
+                g.Clear(Color.White); // pocistim vse tocke in daljice ko je zacetek novih koordinat
+            }
             /// preverimo kero opcijo smo izbrali
             if (radioButton1.Checked == true)
             {
@@ -82,7 +86,7 @@ namespace vaja1
                     x3 = e.X;
                     y3 = e.Y;
                     g.FillRectangle(aBrush, x3, y3, 2, 2); // narisemo tocko
-                    // narisemo crto med njima
+                    g.DrawLine(pen, x2, y2, x3, y3);// narisemo crto med njima
                     stevec = 0;
                 }
             }
@@ -100,7 +104,7 @@ namespace vaja1
                     x2 = e.X;
                     y2 = e.Y;
                     g.FillRectangle(aBrush, x2, y2, 2, 2); // narisemo tocko
-                    // narisemo crto med njima
+                    g.DrawLine(pen, x1, y1, x2, y2); // narisemo crto med njima
                     stevec++;
                 }
                 else if(stevec == 2)
@@ -115,7 +119,7 @@ namespace vaja1
                     x4 = e.X;
                     y4 = e.Y;
                     g.FillRectangle(aBrush, x4, y4, 2, 2); // narisemo tocko
-                    // narisemo daljico
+                    g.DrawLine(pen, x3, y3, x4, y4); // narisemo daljico
                     stevec = 0;
                 }
             }
