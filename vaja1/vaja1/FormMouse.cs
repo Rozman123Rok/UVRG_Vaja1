@@ -26,8 +26,21 @@ namespace vaja1
         int stevilo_tock = 2; /// koliko tock bomo narisali (3 je tocka in daljica, 4 sta 2 daljici)
         private void FormMouse_MouseClick(object sender, MouseEventArgs e)
         {
-            //int x1, y1, x2, y2;
-            ///label1.Text = "X: " + e.X + " Y: " + e.Y;
+            
+            /// preverimo kero opcijo smo izbrali
+            if (radioButton1.Checked == true)
+            {
+                stevilo_tock = 2;
+            }
+            else if (radioButton2.Checked == true)
+            {
+                stevilo_tock = 3;
+            }
+            else
+            {
+                stevilo_tock = 4;
+            }
+
             if (stevilo_tock == 2)
             {
                 if (stevec == 0)
