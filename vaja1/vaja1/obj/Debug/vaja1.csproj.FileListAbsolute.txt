@@ -7,3 +7,12 @@ E:\Faks\2.Letnik\2.Semester\Uvod v rac geo\01.Vaja\vaja1\vaja1\obj\Debug\vaja1.P
 E:\Faks\2.Letnik\2.Semester\Uvod v rac geo\01.Vaja\vaja1\vaja1\obj\Debug\vaja1.csproj.GenerateResource.cache
 E:\Faks\2.Letnik\2.Semester\Uvod v rac geo\01.Vaja\vaja1\vaja1\obj\Debug\vaja1.exe
 E:\Faks\2.Letnik\2.Semester\Uvod v rac geo\01.Vaja\vaja1\vaja1\obj\Debug\vaja1.pdb
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\bin\Debug\vaja1.exe.config
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\bin\Debug\vaja1.exe
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\bin\Debug\vaja1.pdb
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.csprojAssemblyReference.cache
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.FormMouse.resources
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.Properties.Resources.resources
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.csproj.GenerateResource.cache
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.exe
+D:\Faks\02.Semester\UVRG\01.Vaja\UVRG_Vaja1\vaja1\vaja1\obj\Debug\vaja1.pdb
