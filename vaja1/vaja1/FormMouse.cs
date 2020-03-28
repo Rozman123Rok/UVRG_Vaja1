@@ -17,11 +17,17 @@ namespace vaja1
             InitializeComponent();
             
         }
-        
+
+        //Brush aBrush = (Brush)Brushes.Black; // za risanje tock
+        //Pen pen = new Pen(ForeColor); // za risanje daljic med tockama
+        //Graphics g = this.CreateGraphics();
+
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0; // koordinate tock
         bool kx1 = false, ky1 = false, kx2 = false, ky2 = false, kx3 = false, ky3 = false, kx4 = false, ky4 = false; /// ce smo vpisali te koordinate
         int stevec = 0; /// koliko krat smo ze stisnili
         int stevilo_tock = 2; /// koliko tock bomo narisali (3 je tocka in daljica, 4 sta 2 daljici)
+        float D, B, A;
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -273,6 +279,7 @@ namespace vaja1
                     g.FillRectangle(aBrush, x3, y3, 2, 2); // narisemo tocko
                     g.DrawLine(pen, x2, y2, x3, y3);// narisemo crto med njima
                     stevec = 0;
+                    tocka_daljica(x1, x2, x3, y1, y2, y3);
                 }
             }
             else {
@@ -310,16 +317,75 @@ namespace vaja1
                     g.FillRectangle(aBrush, x4, y4, 2, 2); // narisemo tocko
                     g.DrawLine(pen, x3, y3, x4, y4); // narisemo daljico
                     stevec = 0;
+                    se_sekata(x1, x2, x3, x4, y1, y2, y3, y4);
                 }
             }
             /// Tocka 4: x4: 0 y4: 0
             //label2.Text = "Tocka 1: x1: " + x1 + " y1: " + y1;
             //label3.Text = "Tocka 2: x2: " + x2 + " y2: " + y2;
             //label4.Text = "Tocka 3: x3: " + x3 + " y3: " + y3;
-            //label5.Text = "Tocka 4: x4: " + x4 + " y4: " + y4;
+            //label5.Text = "Tocka 4: x4: " + x4 + " y4: " + y4;      
+        }
+        private void tocka_daljica(float x1, float x2, float x3, float y1, float y2, float y3) {
+            /**
+             * Ortogonalno projekcijo točke T1 na poljubno premico, na kateri se nahajata točki T2 in T3, izračunamo sledeče:
 
-           
-            
+                T2 vzamem za novo koordinatno izhodišče ter določimo vektorja V1 in V2, ki kažeta na točki T1 in T3:
+                    V1 = T3-T2
+                    V2 = T1-T2
+                Vektor V1 normaliziramo in dobimo bazni vektor Vn. Le tega si lahko predstavljamo kot vektor, ki določa našo novo X os.
+                Skalarni produkt sp = Vn · V2 poda skalarno vrednost, s pomočjo katere dobimo projecirano točko Tp:
+                    Tp = T2 + Vn * sp
+                Dodatno moramo upoštevati da mora biti 0 ≤ sp ≤ | V1 |, saj drugače projecirana točka Tp leži izven daljice določene z točkama T2 in T3.
+             * **/
+
+
+        }
+        private void se_sekata(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
+            /**
+            D = (T2-T1) x (T4-T3) = (x2 - x1)(y4 - y3) - (x4 - x3)(y2 - y1)
+            A = (T4-T3) x (T1-T3) = (x4 - x3)(y1 - y3) - (x1 - x3)(y4 - y3)
+            B = (T2-T1) x (T1-T3) = (x2 - x1)(y1 - y3) - (x1 - x3)(y2 - y1)
+         */
+            Brush aBrush = (Brush)Brushes.Red; // za risanje tock
+            Pen pen = new Pen(ForeColor); // za risanje daljic med tockama
+            Graphics g = this.CreateGraphics();
+
+            D = (x2 - x1) * (y4 - y3) - (x4 - x3) * (y2 - y1);
+            A = (x4 - x3) * (y1 - y3) - (x1 - x3) * (y4 - y3);
+            B = (x2 - x1) * (y1 - y3) - (x1 - x3) * (y2 - y1);
+
+            //D = A = B = 0
+            if (D == A && A == B && B == 0) {
+                MessageBox.Show("Vsi trije so enaki! Daljici sovpadata");
+                return;
+            }
+
+            if (D == 0) {
+                MessageBox.Show("Daljici sta vzporedni!");
+                return;
+            }
+
+            float Ua = A / D;
+            float Ub = B / D;
+            //0 ≤ Ua ≤ 1
+            //0 ≤ Ub ≤ 1
+            if (0 <= Ua && Ua <= 1 && 0 <= Ub && Ub <= 1)
+            {
+                MessageBox.Show("Se sekata!");
+                // Izracun presecisca!
+                // x = x1 + Ua(x2 - x1) ali x = x3 + Ub(x4 - x3)
+                // y = y1 + Ua(y2 - y1) ali y = y3 + Ub(y4 - y3)
+                float x_p = x1 + Ua * (x2 - x1);
+                float y_p = y1 + Ua * (y2 - y1);
+                MessageBox.Show("Koordinate precesisca: x: " + x_p + " y: " + y_p);
+                g.FillRectangle(aBrush, x_p-1, y_p-1, 4, 4); // narisemo tocko
+
+            }
+            else { 
+                MessageBox.Show("Se ne sekata!"); 
+            }
+
         }
 
     }
