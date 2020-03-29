@@ -18,15 +18,15 @@ namespace vaja1
             
         }
 
-        //Brush aBrush = (Brush)Brushes.Black; // za risanje tock
-        //Pen pen = new Pen(ForeColor); // za risanje daljic med tockama
-        //Graphics g = this.CreateGraphics();
+        /**
+         ROK ROZMAN
+        */
 
         float x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0; // koordinate tock
         bool kx1 = false, ky1 = false, kx2 = false, ky2 = false, kx3 = false, ky3 = false, kx4 = false, ky4 = false; /// ce smo vpisali te koordinate
         int stevec = 0; /// koliko krat smo ze stisnili
         int stevilo_tock = 2; /// koliko tock bomo narisali (3 je tocka in daljica, 4 sta 2 daljici)
-        float D, B, A;
+        float D, B, A; /// za nalogo 3
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)
