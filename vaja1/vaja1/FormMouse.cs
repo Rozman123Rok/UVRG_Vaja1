@@ -166,6 +166,7 @@ namespace vaja1
                     g.FillRectangle(aBrush, x3, y3, 2, 2); // narisemo tocko
                     g.DrawLine(pen, x2, y2, x3, y3);// narisemo crto med njima
                     stevec = 0;
+                    tocka_daljica();
 
                 }
                 else
@@ -191,6 +192,7 @@ namespace vaja1
                     label5.Text = "Tocka 4: x4: " + x4 + " y4: " + y4;
                     g.FillRectangle(aBrush, x4, y4, 2, 2); // narisemo tocko
                     g.DrawLine(pen, x3, y3, x4, y4); // narisemo daljico
+                    se_sekata(x1, x2, x3, x4, y1, y2, y3, y4);
                 }
                 else
                 {
@@ -279,7 +281,8 @@ namespace vaja1
                     g.FillRectangle(aBrush, x3, y3, 2, 2); // narisemo tocko
                     g.DrawLine(pen, x2, y2, x3, y3);// narisemo crto med njima
                     stevec = 0;
-                    tocka_daljica(x1, x2, x3, y1, y2, y3);
+                    //tocka_daljica(x1, x2, x3, y1, y2, y3);
+                    tocka_daljica();
                 }
             }
             else {
@@ -320,33 +323,52 @@ namespace vaja1
                     se_sekata(x1, x2, x3, x4, y1, y2, y3, y4);
                 }
             }
-            /// Tocka 4: x4: 0 y4: 0
-            //label2.Text = "Tocka 1: x1: " + x1 + " y1: " + y1;
-            //label3.Text = "Tocka 2: x2: " + x2 + " y2: " + y2;
-            //label4.Text = "Tocka 3: x3: " + x3 + " y3: " + y3;
-            //label5.Text = "Tocka 4: x4: " + x4 + " y4: " + y4;      
+    
         }
-        private void tocka_daljica(float x1, float x2, float x3, float y1, float y2, float y3) {
-            /**
-             * Ortogonalno projekcijo točke T1 na poljubno premico, na kateri se nahajata točki T2 in T3, izračunamo sledeče:
 
-                T2 vzamem za novo koordinatno izhodišče ter določimo vektorja V1 in V2, ki kažeta na točki T1 in T3:
-                    V1 = T3-T2
-                    V2 = T1-T2
-                Vektor V1 normaliziramo in dobimo bazni vektor Vn. Le tega si lahko predstavljamo kot vektor, ki določa našo novo X os.
-                Skalarni produkt sp = Vn · V2 poda skalarno vrednost, s pomočjo katere dobimo projecirano točko Tp:
-                    Tp = T2 + Vn * sp
-                Dodatno moramo upoštevati da mora biti 0 ≤ sp ≤ | V1 |, saj drugače projecirana točka Tp leži izven daljice določene z točkama T2 in T3.
-             * **/
+        private void tocka_daljica()
+        {
+            Brush asa = (Brush)Brushes.Red; // za risanje tock
+            Pen pen1 = new Pen(ForeColor); // za risanje daljic med tockama
+            Graphics g = this.CreateGraphics();
+            float V1x = x3 - x2; // vektor V1 x koordinata
+            float V1y = y3 - y2; // vektor V1 y koordinata
+            float V2x = x1 - x2; // vektor V2 x koordinata
+            float V2y = y1 - y2; // vektor V2 y koordinata
+            float s = (float)Math.Sqrt(Math.Pow(V1x + V1y, 2)); // modul
+            //float V1n = V1x + V1y / (float)Math.Sqrt(Math.Pow(V1x + V1y, 2));
+            if (s == 0)
+            {
+                MessageBox.Show("Nicelni vektor");
+                return;
+            }
+            else {
+                float Vn_x = V1x / s; // normiran vektor x koordinata
+                float Vn_y = V1y / s; // normiran vektor y koordinata
+                float sp = Vn_x * V2x + Vn_y * V2y; // skalarni produkt
+                float dolzina_V1 = (float)Math.Sqrt(V1x * V1x + V1y * V1y); // dolzina vektorja V1
+                float Tp_x = x2 + Vn_x * sp; // tocka TP x koordinata
+                float Tp_y = y2 + Vn_y * sp; // tocka TP y koordinata
+
+                if (0 <= sp && sp <=dolzina_V1) {
+                    MessageBox.Show("Lezi na daljici");
+                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y);
+                    g.FillRectangle(asa, Tp_x, Tp_y, 2, 2); // narisemo tocko
+                    g.DrawLine(pen1, Tp_x, Tp_y, x1, y1); // narisemo daljico
+                    MessageBox.Show("Narisali");
+                }
+                else {
+                    MessageBox.Show("Lezi izven daljice");
+                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y);
+                }
+
+            }
+
 
 
         }
         private void se_sekata(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
-            /**
-            D = (T2-T1) x (T4-T3) = (x2 - x1)(y4 - y3) - (x4 - x3)(y2 - y1)
-            A = (T4-T3) x (T1-T3) = (x4 - x3)(y1 - y3) - (x1 - x3)(y4 - y3)
-            B = (T2-T1) x (T1-T3) = (x2 - x1)(y1 - y3) - (x1 - x3)(y2 - y1)
-         */
+
             Brush aBrush = (Brush)Brushes.Red; // za risanje tock
             Pen pen = new Pen(ForeColor); // za risanje daljic med tockama
             Graphics g = this.CreateGraphics();
