@@ -352,19 +352,32 @@ namespace vaja1
 
                 if (0 <= sp && sp <=dolzina_V1) {
                     MessageBox.Show("Lezi na daljici");
-                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y);
+                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y); // izpisemo koordinate
                     g.FillRectangle(asa, Tp_x, Tp_y, 2, 2); // narisemo tocko
                     g.DrawLine(pen1, Tp_x, Tp_y, x1, y1); // narisemo daljico
-                    MessageBox.Show("Narisali");
+                    double razdalja;
+                    razdalja = Math.Sqrt(Math.Pow(x1 - Tp_x, 2) + Math.Pow(y1 - Tp_y, 2));
+                    MessageBox.Show("Razdalja: " + razdalja);
+
                 }
                 else {
                     MessageBox.Show("Lezi izven daljice");
-                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y);
+                    MessageBox.Show("x: " + Tp_x + " y: " + Tp_y); // izpisemo koordinate
+                    double razdalja_T2, razdalja_T3; // izracunamo razdaljo do vsake tocke
+                    razdalja_T2 = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+                    razdalja_T3 = Math.Sqrt(Math.Pow(x1 - x3, 2) + Math.Pow(y1 - y3, 2));
+                    if (razdalja_T2 < razdalja_T3) // primerjamo katera je krajsa
+                    {
+                        g.DrawLine(pen1, x2, y2, x1, y1); // narisemo daljico
+                        MessageBox.Show("Razdalja med T1 in T2: " + razdalja_T2); // izpisemo razdaljo
+                    }
+                    else {
+                        g.DrawLine(pen1, x3, y3, x1, y1); // narisemo daljico
+                        MessageBox.Show("Razdalja med T1 in T3: " + razdalja_T3); // izpisemo razdaljo
+                    }
                 }
 
             }
-
-
 
         }
         private void se_sekata(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
